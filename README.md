@@ -1,5 +1,9 @@
 # Conbench API wrapper
 
+  <!-- badges: start -->
+  [![R-CMD-check](https://github.com/conbench/conbenchcoms/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/conbench/conbenchcoms/actions/workflows/R-CMD-check.yaml)
+  <!-- badges: end -->
+
 ## Installation
 conbenchcoms can be installed directly from the repo:
 
