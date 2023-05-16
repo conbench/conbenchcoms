@@ -11,10 +11,6 @@ runs <- function(sha = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
 
   if (!is.null(sha)) {
     req <- req_url_query(req, sha = paste0(sha, collapse = ","))
-    ## TODO: remove when https://github.com/r-lib/httr2/pull/153 is merged
-    if (!utils::packageVersion("httr2") > "0.2.1") {
-      req$url <- curl::curl_unescape(req$url)
-    }
   }
   resp <- conbench_perform(req)
 

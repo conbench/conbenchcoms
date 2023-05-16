@@ -18,7 +18,7 @@ Depends:
 Imports:
     curl,
     glue,
-    httr2,
+    httr2 (>= 0.2.2),
     utils,
     yaml
 Suggests: 
