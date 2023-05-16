@@ -65,7 +65,7 @@ with_mock_dir(test_path("resp-class"), {
   })
 
   test_that("benchmarks() with run_reason returns a data.frame", {
-    run_reason_test <- benchmarks(run_reason = "nightly")
+    run_reason_test <- benchmarks(run_reason = "test")
     expect_s3_class(
       run_reason_test,
       "data.frame"
