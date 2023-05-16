@@ -7,6 +7,7 @@
 benchmarks(
   run_id = NULL,
   batch_id = NULL,
+  run_reason = NULL,
   simplifyVector = TRUE,
   flatten = TRUE,
   ...
@@ -16,6 +17,8 @@ benchmarks(
 \item{run_id}{the run_id to get benchmarks for (default: \code{NULL}, list all)}
 
 \item{batch_id}{the batch_id to get benchmarks for (default: \code{NULL}, list all)}
+
+\item{run_reason}{a string to specify the run reason (default: \code{NULL}, list all)}
 
 \item{simplifyVector}{coerce JSON arrays containing only primitives into an atomic vector}
 

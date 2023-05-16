@@ -63,5 +63,13 @@ with_mock_dir(test_path("resp-class"), {
     )
     expect_identical(batch_ids, unique(batch_id_test2$batch_id))
   })
+
+  test_that("benchmarks() with run_reason returns a data.frame", {
+    run_reason_test <- benchmarks(run_reason = "nightly")
+    expect_s3_class(
+      run_reason_test,
+      "data.frame"
+    )
+  })
 })
 
