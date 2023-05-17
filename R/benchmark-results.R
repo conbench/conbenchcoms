@@ -1,14 +1,14 @@
-#' Get a list of benchmarks
+#' Get a list of benchmark results
 #'
 #' @param run_id the run_id to get benchmarks for (default: `NULL`, list all)
 #' @param batch_id the batch_id to get benchmarks for (default: `NULL`, list all)
 #' @param run_reason a string to specify the run reason (default: `NULL`, list all)
 #' @inheritParams runs
 #'
-#' @return the response
+#' @return a data.frame of benchmark results
 #' @export
-benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
-  req <- req_url_path_append(conbench_request(), "benchmarks")
+benchmark_results <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
+  req <- req_url_path_append(conbench_request(), "benchmark-results")
 
   if (!is.null(run_reason)) {
     req <- req_url_query(req, run_reason = run_reason)
@@ -24,4 +24,13 @@ benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simpli
   resp <- conbench_perform(req)
 
   resp_body_json(resp, simplifyVector = simplifyVector, flatten = flatten, ...)
+}
+
+#' `benchmarks` is deprecated method of getting benchmark results and will be 
+#' retired in a future release. Please use `benchmark_results` instead.
+#' @rdname benchmark_results
+#' @export 
+benchmarks <- function(...) {
+  .Deprecated("benchmark_results")
+  benchmark_results(...)
 }
