@@ -30,7 +30,24 @@ benchmark_results <- function(run_id = NULL, batch_id = NULL, run_reason = NULL,
 #' retired in a future release. Please use `benchmark_results` instead.
 #' @rdname benchmark_results
 #' @export 
-benchmarks <- function(...) {
+benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
   .Deprecated("benchmark_results")
-  benchmark_results(...)
+  #benchmark_results(...)
+
+  req <- req_url_path_append(conbench_request(), "benchmarks")
+
+  if (!is.null(run_reason)) {
+    req <- req_url_query(req, run_reason = run_reason)
+  }
+
+  if (!is.null(batch_id)) {
+    req <- req_url_query(req, batch_id = paste0(batch_id, collapse = ","))
+  }
+
+  if (!is.null(run_id)) {
+    req <- req_url_query(req, run_id = paste0(run_id, collapse = ","))
+  }
+  resp <- conbench_perform(req)
+
+  resp_body_json(resp, simplifyVector = simplifyVector, flatten = flatten, ...)
 }
