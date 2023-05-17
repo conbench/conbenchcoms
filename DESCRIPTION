@@ -16,10 +16,8 @@ License: Apache License (>= 2)
 Depends: 
     R (>= 4.1.0)
 Imports:
-    curl,
     glue,
     httr2 (>= 0.2.2),
-    utils,
     yaml
 Suggests: 
     httptest2,
