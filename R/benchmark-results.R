@@ -9,10 +9,18 @@
 #' @export
 benchmark_results <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
 
+  ## Assert that run_id is a vector of length 5 or less
   if (length(unique(run_id)) > 5) {
-    stop("Too many run_ids, please limit to 5 or less", call. = FALSE)
+    stop("Too many run_ids, please limit to 5 or less or consider making separate requests ", call. = FALSE)
   }
   
+  ## Assert that only one of run_id, batch_id or run_reason is non-NULL
+  non_null_count <- Filter(Negate(is.null), list(run_id, batch_id, run_reason))
+
+  if (length(non_null_count) >= 2) {
+    stop("Only one of run_id, batch_id or run_reason can be non-NULL", call. = FALSE)
+  }
+
   req <- req_url_path_append(conbench_request(), "benchmark-results")
 
   if (!is.null(run_reason)) {
@@ -37,7 +45,6 @@ benchmark_results <- function(run_id = NULL, batch_id = NULL, run_reason = NULL,
 #' @export 
 benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
   .Deprecated("benchmark_results")
-  #benchmark_results(...)
 
   req <- req_url_path_append(conbench_request(), "benchmarks")
 

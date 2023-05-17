@@ -77,3 +77,10 @@ with_mock_dir(test_path("resp-class"), {
 test_that("benchmark_results throws an error when trying to use more than 5 run_ids", {
   expect_error(benchmark_results(LETTERS[1:6]))
 })
+
+test_that("benchmark_results fails when having multiple run_id, batch_id or run_reason arg as non-null", {
+  expect_error(benchmark_results(run_id = "5a1ad", batch_id = "abba0123"))
+  expect_error(benchmark_results(run_id = "5a1ad", run_reason = "test"))
+  expect_error(benchmark_results(batch_id = "abba0123", run_reason = "test"))
+  expect_error(benchmark_results(run_id = "5a1ad", batch_id = "abba0123", run_reason = "test"))
+})
