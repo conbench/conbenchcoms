@@ -73,3 +73,7 @@ with_mock_dir(test_path("resp-class"), {
   })
 })
 
+
+test_that("benchmark_results throws an error when trying to use more than 5 run_ids", {
+  expect_error(benchmark_results(LETTERS[1:6]))
+})

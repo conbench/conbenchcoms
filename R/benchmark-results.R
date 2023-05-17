@@ -8,6 +8,11 @@
 #' @return a data.frame of benchmark results
 #' @export
 benchmark_results <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
+
+  if (length(unique(run_id)) > 5) {
+    stop("Too many run_ids, please limit to 5 or less", call. = FALSE)
+  }
+  
   req <- req_url_path_append(conbench_request(), "benchmark-results")
 
   if (!is.null(run_reason)) {
