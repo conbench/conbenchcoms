@@ -1,3 +1,6 @@
+# conbenchcoms 0.0.3
+* add limit parameter to `benchmark_results`
+
 # conbenchcoms 0.0.2
 
 * Add run_reason argument to `benchmark_results`

@@ -71,6 +71,11 @@ with_mock_dir(test_path("resp-class"), {
       "data.frame"
     )
   })
+
+  test_that("benchmark_results() respect the limit parameter", {
+    limit_test <- benchmark_results(run_reason = "test", limit = 2)
+    expect_true(nrow(limit_test) == 2L)
+  })
 })
 
 
@@ -83,4 +88,11 @@ test_that("benchmark_results fails when having multiple run_id, batch_id or run_
   expect_error(benchmark_results(run_id = "5a1ad", run_reason = "test"))
   expect_error(benchmark_results(batch_id = "abba0123", run_reason = "test"))
   expect_error(benchmark_results(run_id = "5a1ad", batch_id = "abba0123", run_reason = "test"))
+})
+
+test_that("limit fails when no run_reason exists", {
+  expect_error(
+    benchmark_results(limit = 5),
+    "you are setting a limit without setting run_reason. please set run_reason and try again"
+    )
 })
