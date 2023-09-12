@@ -1,10 +1,10 @@
 Package: conbenchcoms
 Title: An API wrapper for conbench communications
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: c(
-    person("Jonathan", "Keane", , "jon@voltrondata.com", role = c("aut", "cre"),
+    person("Jonathan", "Keane", , "jon@voltrondata.com", role = c("aut", "ctb"),
            comment = c(ORCID = "0000-0001-7087-9776")),
-    person("Sam", "Albers", , "sam@voltrondata.com", role = c("aut", "ctb"),
+    person("Sam", "Albers", , "sam@voltrondata.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9270-7884")),
     person("Edward", "Visel", , "edward@voltrondata.com", role = c("aut", "ctb"),
            comment = c(ORCID = "0000-0002-2811-6254")),
