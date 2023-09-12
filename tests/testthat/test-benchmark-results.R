@@ -72,9 +72,15 @@ with_mock_dir(test_path("resp-class"), {
     )
   })
 
-  test_that("benchmark_results() respect the limit parameter", {
+  test_that("benchmark_results() respects the limit parameter", {
     limit_test <- benchmark_results(run_reason = "test", limit = 2)
     expect_true(nrow(limit_test) == 2L)
+  })
+
+  test_that("benchmark_results() respects the days parameter", {
+    day_test <- benchmark_results(run_reason = "nightly", days = 2)
+    ## this is 3 before we look back 2 days from today
+    expect_true(length(unique(as.Date(day_test$timestamp))) == 3L)
   })
 })
 

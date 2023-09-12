@@ -3,7 +3,8 @@
 #' @param run_id the run_id to get benchmarks for (default: `NULL`, list all)
 #' @param batch_id the batch_id to get benchmarks for (default: `NULL`, list all)
 #' @param run_reason a string to specify the run reason (default: `NULL`, list all)
-#' @param limit the number of results to return when `run_reason`` is also specified (default: `NULL`, list all)
+#' @param limit the number of results to return for a specific `run_reason` is also specified (default: `NULL`, list all)
+#' @param days the number of days to look back from today for benchmark results. (default: `NULL`, list all)
 #' @inheritParams runs
 #'
 #' @return a data.frame of benchmark results
@@ -13,6 +14,7 @@ benchmark_results <- function(
     batch_id = NULL,
     run_reason = NULL,
     limit = NULL,
+    days = NULL,
     simplifyVector = TRUE,
     flatten = TRUE,
     ...) {
@@ -32,6 +34,12 @@ benchmark_results <- function(
 
   if (!is.null(run_reason)) {
     req <- req_url_query(req, run_reason = run_reason)
+  }
+
+  if (!is.null(days)) {
+    ## assert that days is a number
+    stopifnot("days must be numeric" = is.numeric(days))
+    req <- req_url_query(req, days = days)
   }
 
   if (!is.null(limit) && !is.null(run_reason)) {
