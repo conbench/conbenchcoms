@@ -9,6 +9,8 @@ benchmark_results(
   run_id = NULL,
   batch_id = NULL,
   run_reason = NULL,
+  limit = NULL,
+  days = NULL,
   simplifyVector = TRUE,
   flatten = TRUE,
   ...
@@ -29,6 +31,10 @@ benchmarks(
 \item{batch_id}{the batch_id to get benchmarks for (default: \code{NULL}, list all)}
 
 \item{run_reason}{a string to specify the run reason (default: \code{NULL}, list all)}
+
+\item{limit}{the number of results to return for a specific \code{run_reason} is also specified (default: \code{NULL}, list all)}
+
+\item{days}{the number of days to look back from today for benchmark results. (default: \code{NULL}, list all)}
 
 \item{simplifyVector}{coerce JSON arrays containing only primitives into an atomic vector}
 

@@ -9,11 +9,11 @@
 An R interface to the conbench API.
 }
 \author{
-\strong{Maintainer}: Jonathan Keane \email{jon@voltrondata.com} (\href{https://orcid.org/0000-0001-7087-9776}{ORCID})
+\strong{Maintainer}: Sam Albers \email{sam@voltrondata.com} (\href{https://orcid.org/0000-0002-9270-7884}{ORCID})
 
 Authors:
 \itemize{
-  \item Sam Albers \email{sam@voltrondata.com} (\href{https://orcid.org/0000-0002-9270-7884}{ORCID}) [contributor]
+  \item Jonathan Keane \email{jon@voltrondata.com} (\href{https://orcid.org/0000-0001-7087-9776}{ORCID}) [contributor]
   \item Edward Visel \email{edward@voltrondata.com} (\href{https://orcid.org/0000-0002-2811-6254}{ORCID}) [contributor]
 }
 

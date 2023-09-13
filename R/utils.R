@@ -11,3 +11,20 @@ url_cleaner <- function(url) {
 
   url
 }
+
+## handle integer messages and coercion
+integer_messager <- function(x, label = NULL) {
+  ## fail if not numeric
+  stopifnot("must be numeric" = is.numeric(x))
+
+  if (is.null(label)) {
+    label <- ""
+  }
+
+  ## coerce to integer
+  if (is.double(x)) {
+    message(glue::glue("{label} must be an integer, converting to {as.integer(x)}L"))
+    x <- as.integer(x)
+  }
+  x
+}
