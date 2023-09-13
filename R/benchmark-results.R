@@ -37,14 +37,12 @@ benchmark_results <- function(
   }
 
   if (!is.null(days)) {
-    ## assert that days is a number
-    stopifnot("days must be numeric" = is.numeric(days))
+    days <- integer_messager(days, label = "days")
     req <- req_url_query(req, days = days)
   }
 
   if (!is.null(limit) && !is.null(run_reason)) {
-    ## assert that limit is a number
-    stopifnot("limit must be numeric" = is.numeric(limit))
+    limit <- integer_messager(limit, label = "limit")
     req <- req_url_query(req, limit = limit)
   }
   
