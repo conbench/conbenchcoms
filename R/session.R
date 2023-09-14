@@ -11,6 +11,19 @@
 #' @return the response
 #' @export
 conbench_perform <- function(data, ...) {
+  error_body <- function(resp) {
+
+    method <- resp[['method']]
+    url <- resp[['url']]
+    status_code <- resp[['status_code']]
+    message(glue::glue("Request details: {method} {url}"))
+
+    message("Response details:")
+    message(glue::glue("Status code: {status_code}"))
+
+    message(resp_body_string(resp))
+  }
+
   # if session is already here, then we can use that
   resp <- data |>
     req_error(is_error = function(resp) FALSE) |>
@@ -23,9 +36,9 @@ conbench_perform <- function(data, ...) {
 
     resp <- data |>
       req_headers(cookie = .conbench_session$cookie) |>
+      req_error(body = error_body) |>
       req_perform(...)
   }
-
   resp
 }
 
