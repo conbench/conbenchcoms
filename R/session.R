@@ -11,13 +11,11 @@
 #' @return the response
 #' @export
 conbench_perform <- function(data, ...) {
-
   # if session is already here, then we can use that
   resp <- data |>
     req_error(is_error = function(resp) FALSE) |>
     req_headers(cookie = .conbench_session$cookie) |>
     req_perform(...)
-
 
   # TODO: is this status too narrow?
   if (resp_status(resp) == 401L) {
