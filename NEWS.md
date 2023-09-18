@@ -1,3 +1,6 @@
+# conbenchcoms 0.0.4
+* add threshold endpoints to conbenchcoms
+
 # conbenchcoms 0.0.3
 * add limit and days parameters to `benchmark_results`
 
