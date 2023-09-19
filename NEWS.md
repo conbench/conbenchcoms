@@ -1,6 +1,3 @@
-# conbenchcoms 0.0.5
-* display more verbose errors when the Conbench API returns an error
-
 # conbenchcoms 0.0.4
 * add threshold endpoints to conbenchcoms
 
