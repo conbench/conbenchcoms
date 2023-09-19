@@ -20,9 +20,11 @@ compare(
 
 \item{contender}{the contender sha of the entity to compare}
 
-\item{zscore_threshold}{the zscore threshold to mark regressions and improvements}
+\item{zscore_threshold}{the zscore threshold to mark regressions and improvements.
+Default is defined at the Conbench api level.}
 
-\item{pairwise_percent_threshold}{the pairwise_percent_threshold to mark regressions and improvements}
+\item{pairwise_percent_threshold}{the pairwise_percent_threshold to mark regressions and improvements.
+Default is defined at the Conbench api level.}
 
 \item{...}{
   Arguments passed on to \code{\link[httr2:resp_body_raw]{httr2::resp_body_json}}

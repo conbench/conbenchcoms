@@ -11,26 +11,20 @@
 #' @return the response
 #' @export
 conbench_perform <- function(data, ...) {
-  # if session is already here, then we can use that
+  # Make an initial call to see if we need to authenticate
   resp <- data |>
     req_error(is_error = function(resp) FALSE) |>
     req_headers(cookie = .conbench_session$cookie) |>
     req_perform(...)
 
-  # TODO: is this status too narrow?
-  if (resp_status(resp) == 401L) {
-    auth_conbench()
+  # Authenticate if we need to
+  if (resp_status(resp) == 401L) auth_conbench()
 
-    resp <- data |>
-      req_error(is_error = function(resp) FALSE) |>
-      req_headers(cookie = .conbench_session$cookie) |>
-      req_perform(...)
-  }
-
-
-  if (resp_is_error(resp)) {
-    stop(error_body(resp), call. = FALSE)
-  }
+  # Run the request again with better error handling
+  resp <- data |>
+    req_error(is_error = function(resp) TRUE, body = error_body) |>
+    req_headers(cookie = .conbench_session$cookie) |>
+    req_perform(...)
 
   resp
 }
@@ -52,7 +46,7 @@ error_body <- function(resp) {
   method <- indent(glue::glue("{resp['method']} {resp['url']}"))
   status_code <- indent(glue::glue("Status code: {resp[['status_code']]}"))
   indented_message <- indent(resp_body_string(resp))
-  glue::glue("\n\nRequest details:\n{method}\nResponse details:\n{status_code}\n---\n{indented_message}")
+  glue::glue("Request details:\n{method}\n\nResponse details:\n{status_code}\n---\n\n{indented_message}")
 }
 
 get_config <- function() {
