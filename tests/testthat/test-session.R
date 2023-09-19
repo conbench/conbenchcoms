@@ -21,7 +21,7 @@ test_that("get_config works to three env vars even when dot_conbench is present"
   expect_identical(set3envs$password, "starr")
 })
 
-test_that("get_config errors when it has no environment variables",{
+test_that("get_config errors when it has no environment variables", {
   expect_error(
     test_get_config_env_vars(
       list(
@@ -40,6 +40,7 @@ with_mock_dir(test_path("not-logged-in"), {
     # This is still a 401 becuase httptest2 only has one possible response for users
     expect_identical(resp_status(resp), 401L)
     expect_identical(.conbench_session$cookie, "REDACTED")
+
   })
 })
 
