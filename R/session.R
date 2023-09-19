@@ -21,10 +21,11 @@ conbench_perform <- function(data, ...) {
   if (resp_status(resp) == 401L) {
     auth_conbench()
 
-    resp <- data |>
-      req_headers(cookie = .conbench_session$cookie) |>
-      req_perform(...)
-  }
+  # Run the request again with better error handling
+  resp <- data |>
+    req_error(is_error = function(resp) resp_is_error(resp), body = error_body) |>
+    req_headers(cookie = .conbench_session$cookie) |>
+    req_perform(...)
 
   resp
 }
