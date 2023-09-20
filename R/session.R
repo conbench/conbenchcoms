@@ -23,7 +23,7 @@ conbench_perform <- function(data, ...) {
 
   # Run the request again with better error handling
   resp <- data |>
-    req_error(is_error = function(resp) resp_is_error(resp), body = error_body) |>
+    req_error(body = error_body) |>
     req_headers(cookie = .conbench_session$cookie) |>
     req_perform(...)
 
