@@ -12,19 +12,20 @@
 #' @export
 conbench_perform <- function(data, ...) {
   # if session is already here, then we can use that
+  # Make an initial call to see if we need to authenticate
   resp <- data |>
     req_error(is_error = function(resp) FALSE) |>
     req_headers(cookie = .conbench_session$cookie) |>
     req_perform(...)
 
-  # TODO: is this status too narrow?
-  if (resp_status(resp) == 401L) {
-    auth_conbench()
+  # Authenticate if we need to
+  if (resp_status(resp) == 401L) auth_conbench()
 
-    resp <- data |>
-      req_headers(cookie = .conbench_session$cookie) |>
-      req_perform(...)
-  }
+  # Run the request again with better error handling
+  resp <- data |>
+    req_error(body = error_body) |>
+    req_headers(cookie = .conbench_session$cookie) |>
+    req_perform(...)
 
   resp
 }
@@ -62,6 +63,20 @@ get_config <- function() {
     )
   }
   creds
+}
+
+error_body <- function(resp) {
+  method <- indent(glue::glue("{resp['method']} {resp['url']}"))
+  status_code <- indent(glue::glue("Status code: {resp[['status_code']]}"))
+  indented_message <- indent(resp_body_string(resp))
+  glue::glue("Request details:\n{method}\n\nResponse details:\n{status_code}\n---\n\n{indented_message}")
+}
+
+indent <- function(message) {
+  lines <- unlist(strsplit(message, "\n")) # Split the message into lines
+  indent <- paste(rep(" ", 2), collapse = "") # Create the indentation string
+  indented_lines <- paste(indent, lines, sep = "") # Add indentation
+  paste(indented_lines, collapse = "\n") # Combine the lines with newline characters
 }
 
 .conbench_session <- new.env(parent = emptyenv())
