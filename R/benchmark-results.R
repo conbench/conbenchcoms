@@ -2,6 +2,7 @@
   run_id, batch_id, run_reason, name, earliest_timestamp, latest_timestamp, cursor
 ) {
   req <- req_url_path_append(conbench_request(), "benchmark-results")
+  req <- req_url_query(req, page_size = 1000)
 
   if (!is.null(run_reason)) {
     req <- req_url_query(req, run_reason = run_reason)
