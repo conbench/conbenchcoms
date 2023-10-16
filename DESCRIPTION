@@ -13,13 +13,14 @@ Authors@R: c(
   )
 Description: An R interface to the conbench API.
 License: Apache License (>= 2)
-Depends: 
+Depends:
     R (>= 4.1.0)
 Imports:
+    dplyr,
     glue,
     httr2 (>= 0.2.2),
     yaml
-Suggests: 
+Suggests:
     httptest2,
     testthat (>= 3.0.0),
     withr

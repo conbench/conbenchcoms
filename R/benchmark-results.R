@@ -87,7 +87,7 @@ benchmark_results <- function(
     )
     resp <- conbench_perform(req)
     json <- resp_body_json(resp, simplifyVector = simplifyVector, flatten = flatten, ...)
-    data <- rbind(data, json[["data"]])
+    data <- dplyr::bind_rows(data, json[["data"]])
   }
 
   data

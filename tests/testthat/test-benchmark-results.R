@@ -26,6 +26,8 @@ with_mock_dir(test_path("resp-class"), {
   })
 
   test_that("benchmark_results() with pagination returns a data.frame", {
+    # The mocked responses for this run ID go through 2 API pages.
+    # There are different tags in the responses, to test out how bind_rows() works.
     the_benchmark <- benchmark_results(run_id = run_id_2)
     expect_s3_class(
       the_benchmark,
