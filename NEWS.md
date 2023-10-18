@@ -1,3 +1,11 @@
+# conbenchcoms 0.0.6
+* Remove `batch_id`, `limit`, `days`, `simplifyVector`, and `flatten` arguments from `benchmark_results`
+* Add `earliest_timestamp` and `latest_timestamp` arguments to `benchmark_results`
+* `benchmark_results` now always returns a `tibble`
+* The `run_id` argument of `benchmark_results` can now only take 1 ID
+* `benchmark_results` now is able to accept any combination of filters instead of requiring 1 at a time
+* `benchmark_results` now paginates until *all* matching data is returned, which works only with Conbench servers of at least version [6c1b93](https://github.com/conbench/conbench/commit/6c1b93)
+
 # conbenchcoms 0.0.5
 * display more verbose errors when the Conbench API returns an error
 
