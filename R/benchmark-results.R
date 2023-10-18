@@ -1,23 +1,15 @@
 .construct_request <- function(
-  run_id, batch_id, run_reason, name, earliest_timestamp, latest_timestamp, cursor
+  run_id, run_reason, earliest_timestamp, latest_timestamp, cursor
 ) {
   req <- req_url_path_append(conbench_request(), "benchmark-results")
   req <- req_url_query(req, page_size = 1000)
-
-  if (!is.null(run_reason)) {
-    req <- req_url_query(req, run_reason = run_reason)
-  }
-
-  if (!is.null(batch_id)) {
-    req <- req_url_query(req, batch_id = batch_id)
-  }
 
   if (!is.null(run_id)) {
     req <- req_url_query(req, run_id = run_id)
   }
 
-  if (!is.null(name)) {
-    req <- req_url_query(req, name = name)
+  if (!is.null(run_reason)) {
+    req <- req_url_query(req, run_reason = run_reason)
   }
 
   if (!is.null(earliest_timestamp)) {
@@ -38,24 +30,18 @@
 #' Get a list of benchmark results
 #'
 #' @param run_id the run_id to get benchmarks for (default: `NULL`, list all)
-#' @param batch_id the batch_id to get benchmarks for (default: `NULL`, list all)
 #' @param run_reason a string to specify the run reason (default: `NULL`, list all)
-#' @param name the conceptual benchmark name (default: `NULL`, list all)
 #' @param earliest_timestamp the earliest benchmark result timestamp (default: `NULL`, go back as far as possible)
 #' @param latest_timestamp the latest benchmark result timestamp (default: `NULL`, go up to the current time)
 #' @inheritParams runs
 #'
-#' @return a data.frame of benchmark results
+#' @return a tibble of benchmark results
 #' @export
 benchmark_results <- function(
     run_id = NULL,
-    batch_id = NULL,
     run_reason = NULL,
-    name = NULL,
     earliest_timestamp = NULL,
     latest_timestamp = NULL,
-    simplifyVector = TRUE,
-    flatten = TRUE,
     ...) {
   ## Assert that run_id is a string
   if (length(run_id) > 1) {
@@ -64,30 +50,26 @@ benchmark_results <- function(
 
   req <- .construct_request(
     run_id = run_id,
-    batch_id = batch_id,
     run_reason = run_reason,
-    name = name,
     earliest_timestamp = earliest_timestamp,
     latest_timestamp = latest_timestamp,
     cursor = NULL
   )
   resp <- conbench_perform(req)
-  json <- resp_body_json(resp, simplifyVector = simplifyVector, flatten = flatten, ...)
-  data <- json[["data"]]
+  json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+  data <- dplyr::as_tibble(json[["data"]])
 
   while (!is.null(json[["metadata"]][["next_page_cursor"]])) {
     req <- .construct_request(
       run_id = run_id,
-      batch_id = batch_id,
       run_reason = run_reason,
-      name = name,
       earliest_timestamp = earliest_timestamp,
       latest_timestamp = latest_timestamp,
       cursor = json[["metadata"]][["next_page_cursor"]]
     )
     resp <- conbench_perform(req)
-    json <- resp_body_json(resp, simplifyVector = simplifyVector, flatten = flatten, ...)
-    data <- dplyr::bind_rows(data, json[["data"]])
+    json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+    data <- dplyr::bind_rows(data, dplyr::as_tibble(json[["data"]]))
   }
 
   data
@@ -96,6 +78,7 @@ benchmark_results <- function(
 #' `benchmarks` is deprecated method of getting benchmark results and will be
 #' retired in a future release. Please use `benchmark_results` instead.
 #' @rdname benchmark_results
+#' @param batch_id deprecated
 #' @export
 benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
   .Deprecated("benchmark_results")

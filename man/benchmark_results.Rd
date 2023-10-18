@@ -7,13 +7,9 @@
 \usage{
 benchmark_results(
   run_id = NULL,
-  batch_id = NULL,
   run_reason = NULL,
-  name = NULL,
   earliest_timestamp = NULL,
   latest_timestamp = NULL,
-  simplifyVector = TRUE,
-  flatten = TRUE,
   ...
 )
 
@@ -29,24 +25,22 @@ benchmarks(
 \arguments{
 \item{run_id}{the run_id to get benchmarks for (default: \code{NULL}, list all)}
 
-\item{batch_id}{the batch_id to get benchmarks for (default: \code{NULL}, list all)}
-
 \item{run_reason}{a string to specify the run reason (default: \code{NULL}, list all)}
-
-\item{name}{the conceptual benchmark name (default: \code{NULL}, list all)}
 
 \item{earliest_timestamp}{the earliest benchmark result timestamp (default: \code{NULL}, go back as far as possible)}
 
 \item{latest_timestamp}{the latest benchmark result timestamp (default: \code{NULL}, go up to the current time)}
 
+\item{...}{arguments passed on to class specific \code{print} methods}
+
+\item{batch_id}{deprecated}
+
 \item{simplifyVector}{coerce JSON arrays containing only primitives into an atomic vector}
 
 \item{flatten}{automatically \code{\link[jsonlite:flatten]{flatten()}} nested data frames into a single non-nested data frame}
-
-\item{...}{arguments passed on to class specific \code{print} methods}
 }
 \value{
-a data.frame of benchmark results
+a tibble of benchmark results
 }
 \description{
 Get a list of benchmark results
