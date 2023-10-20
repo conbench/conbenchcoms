@@ -33,7 +33,6 @@
 #' @param run_reason a string to specify the run reason (default: `NULL`, list all)
 #' @param earliest_timestamp the earliest benchmark result timestamp (default: `NULL`, go back as far as possible)
 #' @param latest_timestamp the latest benchmark result timestamp (default: `NULL`, go up to the current time)
-#' @inheritParams runs
 #'
 #' @return a tibble of benchmark results
 #' @export
@@ -79,6 +78,7 @@ benchmark_results <- function(
 #' retired in a future release. Please use `benchmark_results` instead.
 #' @rdname benchmark_results
 #' @param batch_id deprecated
+#' @inheritParams jsonlite::fromJSON
 #' @export
 benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
   .Deprecated("benchmark_results")

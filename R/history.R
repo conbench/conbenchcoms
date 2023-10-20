@@ -1,7 +1,7 @@
 #' Get history for a benchmark
 #'
 #' @param benchmark_id the hash of a benchmark to get the history for
-#' @inheritParams runs
+#' @inheritParams jsonlite::fromJSON
 #'
 #' @return the response
 #' @export

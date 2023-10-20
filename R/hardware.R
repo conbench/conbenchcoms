@@ -1,7 +1,7 @@
 #' Get hardware
 #'
 #' @param id the id of one specific hardware to get data for.
-#' @inheritParams runs
+#' @inheritParams jsonlite::fromJSON
 #'
 #' @return the response
 #' @export

@@ -1,7 +1,7 @@
 #' Get a list of benchmark info
 #'
 #' @param id the info id for benchmark info
-#' @inheritParams runs
+#' @inheritParams jsonlite::fromJSON
 #'
 #' @return the response
 #' @export
@@ -17,5 +17,3 @@ info <- function(id = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
 
   resp_body_json(resp, simplifyVector = simplifyVector, flatten = flatten, ...)
 }
-
-

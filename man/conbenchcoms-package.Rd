@@ -15,6 +15,7 @@ Authors:
 \itemize{
   \item Jonathan Keane \email{jon@voltrondata.com} (\href{https://orcid.org/0000-0001-7087-9776}{ORCID}) [contributor]
   \item Edward Visel \email{edward@voltrondata.com} (\href{https://orcid.org/0000-0002-2811-6254}{ORCID}) [contributor]
+  \item Austin Dickey \email{austin@voltrondata.com} [contributor]
 }
 
 Other contributors:
