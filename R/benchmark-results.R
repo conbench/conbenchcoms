@@ -33,7 +33,6 @@
 #' @param run_reason a string to specify the run reason (default: `NULL`, list all)
 #' @param earliest_timestamp the earliest benchmark result timestamp (default: `NULL`, go back as far as possible)
 #' @param latest_timestamp the latest benchmark result timestamp (default: `NULL`, go up to the current time)
-#' @inheritParams runs
 #'
 #' @return a tibble of benchmark results
 #' @export
@@ -41,8 +40,7 @@ benchmark_results <- function(
     run_id = NULL,
     run_reason = NULL,
     earliest_timestamp = NULL,
-    latest_timestamp = NULL,
-    ...) {
+    latest_timestamp = NULL) {
   ## Assert that run_id is a string
   if (length(run_id) > 1) {
     stop("Too many run_ids, please limit to 1.", call. = FALSE)
@@ -56,7 +54,7 @@ benchmark_results <- function(
     cursor = NULL
   )
   resp <- conbench_perform(req)
-  json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+  json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE)
   data <- dplyr::as_tibble(json[["data"]])
 
   while (!is.null(json[["metadata"]][["next_page_cursor"]])) {
@@ -68,7 +66,7 @@ benchmark_results <- function(
       cursor = json[["metadata"]][["next_page_cursor"]]
     )
     resp <- conbench_perform(req)
-    json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+    json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE)
     data <- dplyr::bind_rows(data, dplyr::as_tibble(json[["data"]]))
   }
 
@@ -80,23 +78,6 @@ benchmark_results <- function(
 #' @rdname benchmark_results
 #' @param batch_id deprecated
 #' @export
-benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
-  .Deprecated("benchmark_results")
-
-  req <- req_url_path_append(conbench_request(), "benchmarks")
-
-  if (!is.null(run_reason)) {
-    req <- req_url_query(req, run_reason = run_reason)
-  }
-
-  if (!is.null(batch_id)) {
-    req <- req_url_query(req, batch_id = paste0(batch_id, collapse = ","))
-  }
-
-  if (!is.null(run_id)) {
-    req <- req_url_query(req, run_id = paste0(run_id, collapse = ","))
-  }
-  resp <- conbench_perform(req)
-
-  resp_body_json(resp, simplifyVector = simplifyVector, flatten = flatten, ...)
+benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL) {
+  .Defunct("benchmark_results")
 }
