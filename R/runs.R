@@ -1,11 +1,10 @@
 #' Get runs
 #'
 #' @param commit_hashes the commit hashes to search for (required)
-#' @inheritDotParams httr2::resp_body_json
 #'
 #' @return a tibble of runs
 #' @export
-runs <- function(commit_hashes, ...) {
+runs <- function(commit_hashes) {
   req <- req_url_path_append(conbench_request(), "runs")
   req <- req_url_query(
     req,
@@ -13,7 +12,7 @@ runs <- function(commit_hashes, ...) {
     commit_hash = paste0(commit_hashes, collapse = ",")
   )
   resp <- conbench_perform(req)
-  json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+  json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE)
   data <- dplyr::as_tibble(json[["data"]])
 
   while (!is.null(json[["metadata"]][["next_page_cursor"]])) {
@@ -25,7 +24,7 @@ runs <- function(commit_hashes, ...) {
       cursor = json[["metadata"]][["next_page_cursor"]]
     )
     resp <- conbench_perform(req)
-    json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+    json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE)
     data <- dplyr::bind_rows(data, dplyr::as_tibble(json[["data"]]))
   }
 

@@ -4,20 +4,10 @@
 \alias{runs}
 \title{Get runs}
 \usage{
-runs(commit_hashes, ...)
+runs(commit_hashes)
 }
 \arguments{
 \item{commit_hashes}{the commit hashes to search for (required)}
-
-\item{...}{
-  Arguments passed on to \code{\link[httr2:resp_body_raw]{httr2::resp_body_json}}
-  \describe{
-    \item{\code{resp}}{A response object.}
-    \item{\code{check_type}}{Check that response has expected content type? Set to
-\code{FALSE} to suppress the automated check}
-    \item{\code{simplifyVector}}{Should JSON arrays containing only primitives (i.e.
-booleans, numbers, and strings) be caused to atomic vectors?}
-  }}
 }
 \value{
 a tibble of runs

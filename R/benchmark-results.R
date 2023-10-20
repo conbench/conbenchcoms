@@ -40,8 +40,7 @@ benchmark_results <- function(
     run_id = NULL,
     run_reason = NULL,
     earliest_timestamp = NULL,
-    latest_timestamp = NULL,
-    ...) {
+    latest_timestamp = NULL) {
   ## Assert that run_id is a string
   if (length(run_id) > 1) {
     stop("Too many run_ids, please limit to 1.", call. = FALSE)
@@ -55,7 +54,7 @@ benchmark_results <- function(
     cursor = NULL
   )
   resp <- conbench_perform(req)
-  json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+  json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE)
   data <- dplyr::as_tibble(json[["data"]])
 
   while (!is.null(json[["metadata"]][["next_page_cursor"]])) {
@@ -67,7 +66,7 @@ benchmark_results <- function(
       cursor = json[["metadata"]][["next_page_cursor"]]
     )
     resp <- conbench_perform(req)
-    json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE, ...)
+    json <- resp_body_json(resp, simplifyVector = TRUE, flatten = TRUE)
     data <- dplyr::bind_rows(data, dplyr::as_tibble(json[["data"]]))
   }
 
@@ -78,7 +77,6 @@ benchmark_results <- function(
 #' retired in a future release. Please use `benchmark_results` instead.
 #' @rdname benchmark_results
 #' @param batch_id deprecated
-#' @inheritParams jsonlite::fromJSON
 #' @export
 benchmarks <- function(run_id = NULL, batch_id = NULL, run_reason = NULL, simplifyVector = TRUE, flatten = TRUE, ...) {
   .Deprecated("benchmark_results")
