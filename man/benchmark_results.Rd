@@ -12,14 +12,7 @@ benchmark_results(
   latest_timestamp = NULL
 )
 
-benchmarks(
-  run_id = NULL,
-  batch_id = NULL,
-  run_reason = NULL,
-  simplifyVector = TRUE,
-  flatten = TRUE,
-  ...
-)
+benchmarks(run_id = NULL, batch_id = NULL, run_reason = NULL)
 }
 \arguments{
 \item{run_id}{the run_id to get benchmarks for (default: \code{NULL}, list all)}

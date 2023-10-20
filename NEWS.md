@@ -3,6 +3,7 @@
 * Add `commit_hashes` argument to `runs`
 * `runs` now always returns a `tibble`
 * `runs` now paginates until all matching data is returned, which works only with Conbench servers of at least version [7e4d9d0](https://github.com/conbench/conbench/commit/7e4d9d0)
+* Make `benchmarks` defunct
 
 # conbenchcoms 0.0.6
 * Remove `batch_id`, `limit`, `days`, `simplifyVector`, and `flatten` arguments from `benchmark_results`
