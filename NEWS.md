@@ -1,3 +1,8 @@
+# conbenchcoms 0.0.8
+* Remove `simplifyVector` and `flatten` arguments from `history`
+* `history` now always returns a `tibble`
+* `history` now paginates until all matching data is returned, which works only with Conbench servers of at least version [649a9ac](https://github.com/conbench/conbench/commit/649a9ac)
+
 # conbenchcoms 0.0.7
 * Remove `sha`, `simplifyVector`, and `flatten` arguments from `runs`
 * Add `commit_hashes` argument to `runs`
