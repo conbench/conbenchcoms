@@ -4,19 +4,13 @@
 \alias{history}
 \title{Get history for a benchmark}
 \usage{
-history(benchmark_id, simplifyVector = TRUE, flatten = TRUE, ...)
+history(benchmark_id)
 }
 \arguments{
-\item{benchmark_id}{the hash of a benchmark to get the history for}
-
-\item{simplifyVector}{coerce JSON arrays containing only primitives into an atomic vector}
-
-\item{flatten}{automatically \code{\link[jsonlite:flatten]{flatten()}} nested data frames into a single non-nested data frame}
-
-\item{...}{arguments passed on to class specific \code{print} methods}
+\item{benchmark_id}{the ID of a benchmark result to get the history for}
 }
 \value{
-the response
+a tibble of history
 }
 \description{
 Get history for a benchmark
