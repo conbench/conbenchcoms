@@ -1,3 +1,8 @@
+# conbenchcoms 0.0.9
+* Remove `compare` function
+* Add `compare_results` function (similar to old `compare` but only works for comparing benchmark results)
+* Add `compare_runs` function, which returns a tibble, paginating until all matching data is returned, which works only with Conbench servers of at least version [ad06af9](https://github.com/conbench/conbench/commit/ad06af9)
+
 # conbenchcoms 0.0.8
 * Remove `simplifyVector` and `flatten` arguments from `history`
 * `history` now always returns a `tibble`
