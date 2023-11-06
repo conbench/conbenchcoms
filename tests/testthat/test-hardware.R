@@ -13,7 +13,7 @@ with_mock_dir(test_path("logged-in"), {
 })
 
 
-with_mock_dir(test_path("resp-class"), {
+with_mock_dir(test_path("resp"), {
   test_that("hardware() returns a data.frame", {
     the_hardware <- hardware()
     expect_s3_class(

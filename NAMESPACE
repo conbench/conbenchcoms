@@ -2,7 +2,8 @@
 
 export(benchmark_results)
 export(benchmarks)
-export(compare)
+export(compare_results)
+export(compare_runs)
 export(conbench_perform)
 export(conbench_request)
 export(hardware)

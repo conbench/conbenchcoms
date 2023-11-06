@@ -7,7 +7,7 @@ with_mock_dir(test_path("logged-in"), {
   })
 })
 
-with_mock_dir(test_path("resp-class"), {
+with_mock_dir(test_path("resp"), {
   sha_1 <- "babb1ed"
   sha_2 <- "5eaf00d"
   test_that("runs() returns a tibble", {
