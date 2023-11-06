@@ -13,7 +13,7 @@ with_mock_dir(test_path("logged-in"), {
 })
 
 
-with_mock_dir(test_path("resp-class"), {
+with_mock_dir(test_path("resp"), {
   test_that("compare_results returns the correct json", {
     z_thres <- 11.1
     percent_threshold <- 20.2

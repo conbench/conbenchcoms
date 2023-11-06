@@ -13,7 +13,7 @@ with_mock_dir(test_path("logged-in"), {
 })
 
 
-with_mock_dir(test_path("resp-class"), {
+with_mock_dir(test_path("resp"), {
   test_that("info() returns a data.frame", {
     the_info <- info()
     expect_s3_class(

@@ -8,7 +8,7 @@ with_mock_dir(test_path("logged-in"), {
 })
 
 
-with_mock_dir(test_path("resp-class"), {
+with_mock_dir(test_path("resp"), {
   the_id <- "hist-id"
   test_that("history() returns a tibble", {
     the_history <- history(benchmark_id = the_id)

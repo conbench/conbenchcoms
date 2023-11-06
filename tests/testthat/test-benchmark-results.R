@@ -12,7 +12,7 @@ with_mock_dir(test_path("logged-in"), {
   })
 })
 
-with_mock_dir(test_path("resp-class"), {
+with_mock_dir(test_path("resp"), {
   run_id_1 <- "5a1ad"
   run_id_2 <- "5eaf00d"
   batch_id_1 <- "abba0123"
