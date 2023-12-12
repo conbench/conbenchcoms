@@ -16,6 +16,7 @@ conbench_perform <- function(data, ...) {
   resp <- data |>
     req_error(is_error = function(resp) FALSE) |>
     req_headers(cookie = .conbench_session$cookie) |>
+    req_retry(max_tries = 5) |>
     req_perform(...)
 
   # Authenticate if we need to
@@ -25,6 +26,7 @@ conbench_perform <- function(data, ...) {
   resp <- data |>
     req_error(body = error_body) |>
     req_headers(cookie = .conbench_session$cookie) |>
+    req_retry(max_tries = 5) |>
     req_perform(...)
 
   resp
