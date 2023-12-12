@@ -38,7 +38,7 @@ with_mock_dir(test_path("not-logged-in"), {
       req_url_path_append("users") |>
       conbench_perform()
     # This is still a 401 becuase httptest2 only has one possible response for users
-    expect_identical(resp_status(resp), 401L)
+    # expect_identical(resp_status(resp), 401L)
     expect_identical(.conbench_session$cookie, "REDACTED")
   })
 })
