@@ -1,3 +1,6 @@
+# combenchcoms 0.0.10
+* Add httr2's baked in retry strategy to all api calls
+
 # conbenchcoms 0.0.9
 * Remove `compare` function
 * Add `compare_results` function (similar to old `compare` but only works for comparing benchmark results)
